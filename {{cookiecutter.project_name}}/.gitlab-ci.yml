@@ -1,0 +1,38 @@
+image: python:3.10
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
+  PLATFORMIO_CACHE_DIR: "$CI_PROJECT_DIR/.platformio-cache"
+  PRE_COMMIT_HOME: "$CI_PROJECT_DIR/.pre-commit-cache"
+
+cache:
+  paths:
+    - .pip-cache/
+    - .platformio-cache/
+    - .pre-commit-cache/
+
+stages:
+ - check
+ - test
+
+check-job:
+  stage: check
+  script:
+    - pip install -U platformio
+    - pio check --fail-on-defect low
+    - pio run
+    - pio test --without-uploading --without-testing
+
+precommit-job:
+  stage: check
+  script:
+    - pip install pre-commit
+    - pre-commit run --all-files
+
+test-job:
+  stage: test
+  tags:
+    - ado
+  script:
+    - pip install -U platformio
+    - pio test -e disco_f412zg --test-port /dev/ttyACM0

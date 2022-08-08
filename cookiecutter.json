@@ -1,0 +1,12 @@
+{
+    "gitlab_url": "https://gitlab.forge.hefr.ch/ado/20xy-20xz/sup/tp01/tp01-x.git",
+    "year": "{% now 'local', '%Y' %}",
+    "project_name": "{{ cookiecutter.gitlab_url | extractslug }}",
+    "author": "Jacques Supcik",
+    "email": "jacques.supcik@hefr.ch",
+    "project_brief": "",
+    "_extensions": [
+        "jinja2_time.TimeExtension",
+        "local_extensions.extractslug"
+    ]
+}
