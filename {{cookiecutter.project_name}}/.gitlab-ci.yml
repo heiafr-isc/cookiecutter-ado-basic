@@ -19,9 +19,10 @@ check-job:
   stage: check
   script:
     - pip install -U platformio
-    - pio check --fail-on-defect low
+    - pio check --skip-packages --fail-on-defect high --fail-on-defect medium --fail-on-defect low
     - pio run
     - pio test --without-uploading --without-testing
+    - python ./scripts/check_warnings.py
 
 precommit-job:
   stage: check

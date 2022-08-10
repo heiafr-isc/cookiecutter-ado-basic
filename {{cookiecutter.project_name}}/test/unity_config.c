@@ -36,7 +36,9 @@ void UnityOutputStart() {
     BSP_COM_Init(COM1, &uart_handle);
 }
 
-void UnityOutputChar(char c) { HAL_UART_Transmit(&uart_handle, (uint8_t*)(&c), 1, 1000); }
+void UnityOutputChar(char c) {
+    HAL_UART_Transmit(&uart_handle, (uint8_t*)(&c), 1, 1000);
+}
 
 void UnityOutputFlush() {}
 
